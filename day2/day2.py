@@ -3,22 +3,17 @@ data = [line.strip() for line in open(r"D:\Documents\git\adventOfCode\day2\input
 passing = []
 
 def passcheck(password):
-    policy = password.split(' ')[0]
+    policy = password.split(' ')[0].split('-')
     letter = password.split(' ')[1][0]
     password = password.split(' ')[2]
 
-    policy = policy.split('-')
-
-
     count = 0
-    for i in range(len(password)):
-        #print('password: ' + password[i] + ' Letter: ' + letter)
-        if password[i] == letter:
-            count += 1
-
-    if count >= int(policy[0]) and count <= int(policy[1]):
-        print('pass')
-        passing.append(password)
+    if (password[int(policy[0])-1] == letter and password[int(policy[1])-1] != letter):
+            passing.append(password)
+            print('pass')
+    elif (password[int(policy[0])-1] != letter and password[int(policy[1])-1] == letter):
+            passing.append(password)
+            print('pass')
     else:
         print('fail')
 
